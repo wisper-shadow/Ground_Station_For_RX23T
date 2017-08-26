@@ -258,7 +258,7 @@ post-build:
 	-C:\Renesas\E2_STU~1\DEBUGC~1\RENESA~1.EXE RX_PROJECT_Y_2_0.abs RX_PROJECT_Y_2_0.x 
 	@echo.
 
-.PHONY: all clean dependents $(LINKER_OUTPUT_OUTPUTS)
+.PHONY: all clean dependents
 .SECONDARY: post-build
 
 -include ../makefile.targets

@@ -96,11 +96,15 @@ void CMT0_IntHandler(void)
 {
     setpsw_i();
     if(time_stamp == 25)
+    {
+        LED1 = 1;
         OLED_ShowString(108,0,"sw",16);
+    }
     if(time_stamp == 50)
     {
-        time_stamp = 0;
+        LED1 = 0;
         OLED_ShowString(108,0,"  ",16);
+        time_stamp = 0;
     }
     OLED_Display();
     time_stamp++;
