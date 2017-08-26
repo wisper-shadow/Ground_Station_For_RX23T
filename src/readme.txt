@@ -26,3 +26,21 @@
 			KEY1：
 			KEY2：
 			KEY3：向飞机发送"03" 降落	
+			
+			
+			LED:
+				LED1： 	53 P43	//BLUE
+		 		LED2：	51 P45	//YELLOW
+			OLED:
+				SCL: 	64	PA4
+				SDA: 	63	PA5
+			KEY:
+			DROP 		29 
+			EMERGENCY	31
+			GO			49
+			BACK		45
+			LEFT		47
+			RIGHT		43
+			STOP		41
+			-90			46
+			+90			48

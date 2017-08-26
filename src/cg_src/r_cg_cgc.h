@@ -23,7 +23,7 @@
 * Device(s)    : R5F523T5AxFM
 * Tool-Chain   : CCRX
 * Description  : This file implements device driver for CGC module.
-* Creation Date: 2017/8/13
+* Creation Date: 2017/8/26
 ***********************************************************************************************************************/
 #ifndef CGC_H
 #define CGC_H

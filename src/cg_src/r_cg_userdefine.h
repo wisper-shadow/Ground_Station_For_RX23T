@@ -23,7 +23,7 @@
 * Device(s)    : R5F523T5AxFM
 * Tool-Chain   : CCRX
 * Description  : This file includes user definition.
-* Creation Date: 2017/8/13
+* Creation Date: 2017/8/26
 ***********************************************************************************************************************/
 #ifndef _USER_DEF_H
 #define _USER_DEF_H
@@ -54,12 +54,9 @@ User definitions
 #define LED2 PORT4.PODR.BIT.B5
 
 void KeyScan(void);
-void LED1_Twinkle(void);
-void LED2_Twinkle(void);
 void OLED_Display(void);
 void Receive(void);
 void Flag_Display(void);
 void Receive_Data_Handling();
-void clear_str(uint8_t * const str, uint16_t length);
 /* End user code. Do not edit comment generated here */
 #endif

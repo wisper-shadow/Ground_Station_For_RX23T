@@ -23,7 +23,7 @@
 * Device(s)    : R5F523T5AxFM
 * Tool-Chain   : CCRX
 * Description  : This file implements main function.
-* Creation Date: 2017/8/13
+* Creation Date: 2017/8/26
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -60,7 +60,7 @@ uint8_t SCI_Send_Num[10];
 uint8_t buff[12]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x10,0xac,0xad};
 uint8_t Distance = 0;
 uint8_t Coo_x = 0,Coo_y = 0;
-uint8_t flag_display = 0;
+int flag_display = 0;
 uint8_t i = 0;
 
 bool sci1_trans = false;
@@ -112,24 +112,14 @@ void main(void)
 {
     R_MAIN_UserInit();
     /* Start user code. Do not edit comment generated here */
-	OLED_Init();			//初始化OLED
+	OLED_Init();
 	OLED_Clear();
-//	R_SCI1_Serial_Receive(SCI1_Receive_Data,15);
+
     while (1U)
     {
     	KeyScan();
     	Data_Caculate();
     	OLED_Display();
-//    	OLED_ShowString(0,3,SCI1_Receive_Data,16);
-//    	if(SCI1_Receive_Data[0]<48||SCI1_Receive_Data[0]>57)
-//    	{
-//    		SCI1_Receive_Data[0] = ' ';
-//    	}
-    	//OLED_ShowChar(x,3,SCI1_Receive_Data[0],16);
-//    	SCI1_Receive_Data[0] = ' ';
-//    	x+=8;
-//    	if(x>=96)
-//    		x=0;
     	Flag_Display();
     }
     /* End user code. Do not edit comment generated here */
@@ -149,26 +139,6 @@ void R_MAIN_UserInit(void)
 }
 
 /* Start user code for adding. Do not edit comment generated here */
-void clear_str(uint8_t * const str, uint16_t length)
-{
-	int i;
-	for(i=0;i<length-1;i++)
-	{
-		str[i] = 0;
-	}
-}
-void LED1_Twinkle(void)
-{
-	LED1 = 1;
-	delay_ms(50);
-	LED1 = 0;
-}
-void LED2_Twinkle(void)
-{
-	LED2 = 1;
-	delay_ms(50);
-	LED2 = 0;
-}
 void KeyScan(void)
 {
 	if(KEY1 == 0)
@@ -176,16 +146,20 @@ void KeyScan(void)
 		delay_ms(5);
 		if(KEY1 == 0)
 		{
+		    LED2 = 1;
+		    while(KEY1==0);
+		    LED2 = 0;
 			R_SCI1_Serial_Send(&buff[6],1);
-			LED2_Twinkle();
-		}//while(KEY1==0);
+		}
 	}
 	if(KEY2 == 0)
 		{
 			delay_ms(5);
 			if(KEY2 == 0)
 			{
-				LED2_Twinkle();
+	            LED2 = 1;
+	            while(KEY2==0);
+	            LED2 = 0;
 				R_SCI1_Serial_Send(&buff[11],1);
 			}
 		}
@@ -194,7 +168,9 @@ void KeyScan(void)
 		delay_ms(5);
 		if(KEY3 == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY3==0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[10],1);
 		}
 	}
@@ -203,79 +179,95 @@ void KeyScan(void)
 		delay_ms(5);
 		if(KEY_GO == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_GO == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[0],1);
 			OLED_ShowCHinese(110,6,6);
-		}//while(KEY_GO == 0);
+		}
 	}
 	if(KEY_BACK == 0)
 	{
 		delay_ms(5);
 		if(KEY_BACK == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_BACK == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[1],1);
 			OLED_ShowCHinese(110,6,7);
 
-		}//while(KEY_BACK == 0);
+		}
 	}
 	if(KEY_LEFT == 0)
 	{
 		delay_ms(5);
 		if(KEY_LEFT == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_LEFT == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[2],1);
 			OLED_ShowCHinese(110,6,8);
-		}//while(KEY_LEFT == 0);
+		}
 	}
 	if(KEY_RIGHT == 0)
 	{
 		delay_ms(5);
 		if(KEY_RIGHT == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_RIGHT == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[3],1);
 			OLED_ShowCHinese(110,6,9);
-		}//while(KEY_RIGHT == 0);
+		}
 	}
 	if(KEY_START == 0)
 	{
 		delay_ms(5);
 		if(KEY_START == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_START == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[4],1);
 			OLED_ShowCHinese(110,3,10);
-		}//while(KEY_START == 0);
+		}
 	}
 	if(KEY_STOP == 0)
 	{
 		delay_ms(5);
 		if(KEY_STOP == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_STOP == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[5],1);
 			OLED_ShowCHinese(110,3,11);
-		}//while(KEY_STOP == 0);
+		}
 	}
 	if(KEY_LEFT_Now == 0)
 	{
 		delay_ms(5);
 		if(KEY_LEFT_Now == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_LEFT_Now == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[7],1);
-		}//while(KEY_STOP == 0);
+		}
 	}
 	if(KEY_RIGHT_Now == 0)
 	{
 		delay_ms(5);
 		if(KEY_RIGHT_Now == 0)
 		{
-			LED2_Twinkle();
+            LED2 = 1;
+            while(KEY_RIGHT_Now == 0);
+            LED2 = 0;
 			R_SCI1_Serial_Send(&buff[8],1);
-		}//while(KEY_STOP == 0);
+		}
 	}
 }
 void OLED_Display(void)
