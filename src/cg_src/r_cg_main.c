@@ -39,6 +39,7 @@ Includes
 #include "r_cg_macrodriver.h"
 #include "r_cg_cgc.h"
 #include "r_cg_port.h"
+#include "r_cg_cmt.h"
 #include "r_cg_sci.h"
 /* Start user code for include. Do not edit comment generated here */
 #include <stdbool.h>
@@ -141,35 +142,24 @@ void R_MAIN_UserInit(void)
 /* Start user code for adding. Do not edit comment generated here */
 void KeyScan(void)
 {
-	if(KEY1 == 0)
-	{
-		delay_ms(5);
-		if(KEY1 == 0)
-		{
-		    LED2 = 1;
-		    while(KEY1==0);
-		    LED2 = 0;
-			R_SCI1_Serial_Send(&buff[6],1);
-		}
-	}
-	if(KEY2 == 0)
+	if(DROP == 0)
 		{
 			delay_ms(5);
-			if(KEY2 == 0)
+			if(DROP == 0)
 			{
 	            LED2 = 1;
-	            while(KEY2==0);
+	            while(DROP==0);
 	            LED2 = 0;
 				R_SCI1_Serial_Send(&buff[11],1);
 			}
 		}
-	if(KEY3 == 0)
+	if(EMERGENCY == 0)
 	{
 		delay_ms(5);
-		if(KEY3 == 0)
+		if(EMERGENCY == 0)
 		{
             LED2 = 1;
-            while(KEY3==0);
+            while(EMERGENCY==0);
             LED2 = 0;
 			R_SCI1_Serial_Send(&buff[10],1);
 		}
@@ -223,18 +213,6 @@ void KeyScan(void)
 			OLED_ShowCHinese(110,6,9);
 		}
 	}
-	if(KEY_START == 0)
-	{
-		delay_ms(5);
-		if(KEY_START == 0)
-		{
-            LED2 = 1;
-            while(KEY_START == 0);
-            LED2 = 0;
-			R_SCI1_Serial_Send(&buff[4],1);
-			OLED_ShowCHinese(110,3,10);
-		}
-	}
 	if(KEY_STOP == 0)
 	{
 		delay_ms(5);
@@ -243,30 +221,30 @@ void KeyScan(void)
             LED2 = 1;
             while(KEY_STOP == 0);
             LED2 = 0;
-			R_SCI1_Serial_Send(&buff[5],1);
+			R_SCI1_Serial_Send(&buff[4],1);
 			OLED_ShowCHinese(110,3,11);
 		}
 	}
-	if(KEY_LEFT_Now == 0)
+	if(KEY_LEFT_90 == 0)
 	{
 		delay_ms(5);
-		if(KEY_LEFT_Now == 0)
+		if(KEY_LEFT_90 == 0)
 		{
             LED2 = 1;
-            while(KEY_LEFT_Now == 0);
+            while(KEY_LEFT_90 == 0);
             LED2 = 0;
-			R_SCI1_Serial_Send(&buff[7],1);
+			R_SCI1_Serial_Send(&buff[5],1);
 		}
 	}
-	if(KEY_RIGHT_Now == 0)
+	if(KEY_RIGHT_90 == 0)
 	{
 		delay_ms(5);
-		if(KEY_RIGHT_Now == 0)
+		if(KEY_RIGHT_90 == 0)
 		{
             LED2 = 1;
-            while(KEY_RIGHT_Now == 0);
+            while(KEY_RIGHT_90 == 0);
             LED2 = 0;
-			R_SCI1_Serial_Send(&buff[8],1);
+			R_SCI1_Serial_Send(&buff[6],1);
 		}
 	}
 }

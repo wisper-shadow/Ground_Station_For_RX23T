@@ -18,78 +18,69 @@
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
-* File Name    : r_cg_hardware_setup.c
+* File Name    : r_cg_cmt.h
 * Version      : Code Generator for RX23T V1.00.04.02 [29 Nov 2016]
 * Device(s)    : R5F523T5AxFM
 * Tool-Chain   : CCRX
-* Description  : This file implements system initializing function.
+* Description  : This file implements device driver for CMT module.
 * Creation Date: 2017/8/26
 ***********************************************************************************************************************/
+#ifndef CMT_H
+#define CMT_H
 
 /***********************************************************************************************************************
-Pragma directive
+Macro definitions (Register bit)
 ***********************************************************************************************************************/
-/* Start user code for pragma. Do not edit comment generated here */
+/*
+    Compare Match Timer Control Register (CMCR)
+*/
+/* Clock Select (CKS[1:0]) */
+#define _0000_CMT_CMCR_CKS_PCLK8                (0x0000U) /* PCLK/8 */
+#define _0001_CMT_CMCR_CKS_PCLK32               (0x0001U) /* PCLK/32 */
+#define _0002_CMT_CMCR_CKS_PCLK128              (0x0002U) /* PCLK/128 */
+#define _0003_CMT_CMCR_CKS_PCLK512              (0x0003U) /* PCLK/512 */
+/* Compare Match Interrupt Enable (CMIE) */
+#define _0000_CMT_CMCR_CMIE_DISABLE             (0x0000U) /* Compare match interrupt (CMIn) disabled */
+#define _0040_CMT_CMCR_CMIE_ENABLE              (0x0040U) /* Compare match interrupt (CMIn) enabled */
+#define _0080_CMT_CMCR_DEFAULT                  (0x0080U) /* Write default value of CMCR */
+
+/*
+    Interrupt Source Priority Register n (IPRn)
+*/
+/* Interrupt Priority Level Select (IPR[3:0]) */
+#define _00_CMT_PRIORITY_LEVEL0                 (0x00U) /* Level 0 (interrupt disabled) */
+#define _01_CMT_PRIORITY_LEVEL1                 (0x01U) /* Level 1 */
+#define _02_CMT_PRIORITY_LEVEL2                 (0x02U) /* Level 2 */
+#define _03_CMT_PRIORITY_LEVEL3                 (0x03U) /* Level 3 */
+#define _04_CMT_PRIORITY_LEVEL4                 (0x04U) /* Level 4 */
+#define _05_CMT_PRIORITY_LEVEL5                 (0x05U) /* Level 5 */
+#define _06_CMT_PRIORITY_LEVEL6                 (0x06U) /* Level 6 */
+#define _07_CMT_PRIORITY_LEVEL7                 (0x07U) /* Level 7 */
+#define _08_CMT_PRIORITY_LEVEL8                 (0x08U) /* Level 8 */
+#define _09_CMT_PRIORITY_LEVEL9                 (0x09U) /* Level 9 */
+#define _0A_CMT_PRIORITY_LEVEL10                (0x0AU) /* Level 10 */
+#define _0B_CMT_PRIORITY_LEVEL11                (0x0BU) /* Level 11 */
+#define _0C_CMT_PRIORITY_LEVEL12                (0x0CU) /* Level 12 */
+#define _0D_CMT_PRIORITY_LEVEL13                (0x0DU) /* Level 13 */
+#define _0E_CMT_PRIORITY_LEVEL14                (0x0EU) /* Level 14 */
+#define _0F_CMT_PRIORITY_LEVEL15                (0x0FU) /* Level 15 (highest) */
+
+/***********************************************************************************************************************
+Macro definitions
+***********************************************************************************************************************/
+#define _7A11_CMT0_CMCOR_VALUE                  (0x7A11U) /* Compare match value */
+
+/***********************************************************************************************************************
+Typedef definitions
+***********************************************************************************************************************/
+
+/***********************************************************************************************************************
+Global functions
+***********************************************************************************************************************/
+void R_CMT0_Create(void);
+void R_CMT0_Start(void);
+void R_CMT0_Stop(void);
+
+/* Start user code for function. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
-
-/***********************************************************************************************************************
-Includes
-***********************************************************************************************************************/
-#include "r_cg_macrodriver.h"
-#include "r_cg_cgc.h"
-#include "r_cg_port.h"
-#include "r_cg_cmt.h"
-#include "r_cg_sci.h"
-/* Start user code for include. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
-#include "r_cg_userdefine.h"
-
-/***********************************************************************************************************************
-Global variables and functions
-***********************************************************************************************************************/
-/* Start user code for global. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
-
-/***********************************************************************************************************************
-* Function Name: R_Systeminit
-* Description  : This function initializes every macro.
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-void R_Systeminit(void)
-{
-    /* Enable writing to registers related to operating modes, LPC, CGC and software reset */
-    SYSTEM.PRCR.WORD = 0xA50FU; 
-
-    /* Enable writing to MPC pin function control registers */
-    MPC.PWPR.BIT.B0WI = 0U;
-    MPC.PWPR.BIT.PFSWE = 1U;
-
-    /* Initialize non-existent pins */
-
-    /* Set peripheral settings */
-    R_CGC_Create();
-    R_PORT_Create();
-    R_CMT0_Create();
-    R_SCI1_Create();
-
-    /* Disable writing to MPC pin function control registers */
-    MPC.PWPR.BIT.PFSWE = 0U;    
-    MPC.PWPR.BIT.B0WI = 1U;     
-
-    /* Enable protection */
-    SYSTEM.PRCR.WORD = 0xA500U;  
-}
-/***********************************************************************************************************************
-* Function Name: HardwareSetup
-* Description  : This function initializes hardware setting.
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-void HardwareSetup(void)
-{
-    R_Systeminit();
-}
-
-/* Start user code for adding. Do not edit comment generated here */
-/* End user code. Do not edit comment generated here */
+#endif

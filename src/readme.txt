@@ -35,12 +35,12 @@
 				SCL: 	64	PA4
 				SDA: 	63	PA5
 			KEY:
-			DROP 		29 
-			EMERGENCY	31
-			GO			49
-			BACK		45
-			LEFT		47
-			RIGHT		43
-			STOP		41
-			-90			46
-			+90			48
+			DROP 		29	P94
+			EMERGENCY	31	P92
+			GO			49	P47
+			BACK		45	P30
+			LEFT		47	P23
+			RIGHT		43	P31
+			-90			46	P24
+			+90			48	P22
+			STOP		41	P32

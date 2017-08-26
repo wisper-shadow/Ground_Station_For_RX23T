@@ -34,24 +34,22 @@ User definitions
 #define FAST_INTERRUPT_VECTOR 0
 
 /* Start user code for function. Do not edit comment generated here */
-#define KEY1 PORT1.PIDR.BIT.B1
-#define KEY2 PORT4.PIDR.BIT.B1
-#define KEY3 PORT4.PIDR.BIT.B7
+#define DROP            PORT9.PIDR.BIT.B4
+#define EMERGENCY       PORT9.PIDR.BIT.B2
 
-#define KEY_GO PORT0.PIDR.BIT.B2
-#define KEY_BACK PORT9.PIDR.BIT.B2
-#define KEY_LEFT PORT9.PIDR.BIT.B3
-#define KEY_RIGHT PORTA.PIDR.BIT.B2
+#define KEY_GO          PORT4.PIDR.BIT.B7
+#define KEY_BACK        PORT3.PIDR.BIT.B0
+#define KEY_LEFT        PORT2.PIDR.BIT.B3
+#define KEY_RIGHT       PORT3.PIDR.BIT.B1
 
-#define KEY_LEFT_Now PORT1.PIDR.BIT.B0
-#define KEY_RIGHT_Now PORT4.PIDR.BIT.B0
+#define KEY_LEFT_90     PORT2.PIDR.BIT.B4
+#define KEY_RIGHT_90    PORT2.PIDR.BIT.B2
 
-#define KEY_STOP PORT7.PIDR.BIT.B5
-#define KEY_START PORT7.PIDR.BIT.B6
+#define KEY_STOP        PORT3.PIDR.BIT.B2
 
 
-#define LED1 PORT4.PODR.BIT.B3
-#define LED2 PORT4.PODR.BIT.B5
+#define LED1            PORT4.PODR.BIT.B3
+#define LED2            PORT4.PODR.BIT.B5
 
 void KeyScan(void);
 void OLED_Display(void);

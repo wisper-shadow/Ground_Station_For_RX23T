@@ -18,11 +18,11 @@
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
-* File Name    : r_cg_hardware_setup.c
+* File Name    : r_cg_cmt_user.c
 * Version      : Code Generator for RX23T V1.00.04.02 [29 Nov 2016]
 * Device(s)    : R5F523T5AxFM
 * Tool-Chain   : CCRX
-* Description  : This file implements system initializing function.
+* Description  : This file implements device driver for CMT module.
 * Creation Date: 2017/8/26
 ***********************************************************************************************************************/
 
@@ -36,10 +36,7 @@ Pragma directive
 Includes
 ***********************************************************************************************************************/
 #include "r_cg_macrodriver.h"
-#include "r_cg_cgc.h"
-#include "r_cg_port.h"
 #include "r_cg_cmt.h"
-#include "r_cg_sci.h"
 /* Start user code for include. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
 #include "r_cg_userdefine.h"
@@ -51,44 +48,20 @@ Global variables and functions
 /* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
-* Function Name: R_Systeminit
-* Description  : This function initializes every macro.
+* Function Name: r_cmt_cmi0_interrupt
+* Description  : None
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void R_Systeminit(void)
+#if FAST_INTERRUPT_VECTOR == VECT_CMT0_CMI0
+#pragma interrupt r_cmt_cmi0_interrupt(vect=VECT(CMT0,CMI0),fint)
+#else
+#pragma interrupt r_cmt_cmi0_interrupt(vect=VECT(CMT0,CMI0))
+#endif
+static void r_cmt_cmi0_interrupt(void)
 {
-    /* Enable writing to registers related to operating modes, LPC, CGC and software reset */
-    SYSTEM.PRCR.WORD = 0xA50FU; 
-
-    /* Enable writing to MPC pin function control registers */
-    MPC.PWPR.BIT.B0WI = 0U;
-    MPC.PWPR.BIT.PFSWE = 1U;
-
-    /* Initialize non-existent pins */
-
-    /* Set peripheral settings */
-    R_CGC_Create();
-    R_PORT_Create();
-    R_CMT0_Create();
-    R_SCI1_Create();
-
-    /* Disable writing to MPC pin function control registers */
-    MPC.PWPR.BIT.PFSWE = 0U;    
-    MPC.PWPR.BIT.B0WI = 1U;     
-
-    /* Enable protection */
-    SYSTEM.PRCR.WORD = 0xA500U;  
-}
-/***********************************************************************************************************************
-* Function Name: HardwareSetup
-* Description  : This function initializes hardware setting.
-* Arguments    : None
-* Return Value : None
-***********************************************************************************************************************/
-void HardwareSetup(void)
-{
-    R_Systeminit();
+    /* Start user code. Do not edit comment generated here */
+    /* End user code. Do not edit comment generated here */
 }
 
 /* Start user code for adding. Do not edit comment generated here */

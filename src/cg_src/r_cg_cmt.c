@@ -18,11 +18,11 @@
 ***********************************************************************************************************************/
 
 /***********************************************************************************************************************
-* File Name    : r_cg_hardware_setup.c
+* File Name    : r_cg_cmt.c
 * Version      : Code Generator for RX23T V1.00.04.02 [29 Nov 2016]
 * Device(s)    : R5F523T5AxFM
 * Tool-Chain   : CCRX
-* Description  : This file implements system initializing function.
+* Description  : This file implements device driver for CMT module.
 * Creation Date: 2017/8/26
 ***********************************************************************************************************************/
 
@@ -36,10 +36,7 @@ Pragma directive
 Includes
 ***********************************************************************************************************************/
 #include "r_cg_macrodriver.h"
-#include "r_cg_cgc.h"
-#include "r_cg_port.h"
 #include "r_cg_cmt.h"
-#include "r_cg_sci.h"
 /* Start user code for include. Do not edit comment generated here */
 /* End user code. Do not edit comment generated here */
 #include "r_cg_userdefine.h"
@@ -51,44 +48,53 @@ Global variables and functions
 /* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
-* Function Name: R_Systeminit
-* Description  : This function initializes every macro.
+* Function Name: R_CMT0_Create
+* Description  : This function initializes the CMT0 channel.
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void R_Systeminit(void)
+void R_CMT0_Create(void)
 {
-    /* Enable writing to registers related to operating modes, LPC, CGC and software reset */
-    SYSTEM.PRCR.WORD = 0xA50FU; 
+    /* Disable CMI0 interrupt */
+    IEN(CMT0,CMI0) = 0U;
+    
+    /* Cancel CMT stop state in LPC */
+    MSTP(CMT0) = 0U;
 
-    /* Enable writing to MPC pin function control registers */
-    MPC.PWPR.BIT.B0WI = 0U;
-    MPC.PWPR.BIT.PFSWE = 1U;
+    /* Set control registers */
+    CMT0.CMCR.WORD = _0002_CMT_CMCR_CKS_PCLK128 | _0040_CMT_CMCR_CMIE_ENABLE | _0080_CMT_CMCR_DEFAULT;
+    CMT0.CMCOR = _7A11_CMT0_CMCOR_VALUE;
 
-    /* Initialize non-existent pins */
-
-    /* Set peripheral settings */
-    R_CGC_Create();
-    R_PORT_Create();
-    R_CMT0_Create();
-    R_SCI1_Create();
-
-    /* Disable writing to MPC pin function control registers */
-    MPC.PWPR.BIT.PFSWE = 0U;    
-    MPC.PWPR.BIT.B0WI = 1U;     
-
-    /* Enable protection */
-    SYSTEM.PRCR.WORD = 0xA500U;  
+    /* Set CMI0 priority level */
+    IPR(CMT0,CMI0) = _0E_CMT_PRIORITY_LEVEL14;
 }
 /***********************************************************************************************************************
-* Function Name: HardwareSetup
-* Description  : This function initializes hardware setting.
+* Function Name: R_CMT0_Start
+* Description  : This function starts the CMT0 channel counter.
 * Arguments    : None
 * Return Value : None
 ***********************************************************************************************************************/
-void HardwareSetup(void)
+void R_CMT0_Start(void)
 {
-    R_Systeminit();
+    /* Enable CMI0 interrupt in ICU */
+    IEN(CMT0,CMI0) = 1U;
+
+    /* Start CMT0 count */
+    CMT.CMSTR0.BIT.STR0 = 1U;
+}
+/***********************************************************************************************************************
+* Function Name: R_CMT0_Stop
+* Description  : This function stops the CMT0 channel counter.
+* Arguments    : None
+* Return Value : None
+***********************************************************************************************************************/
+void R_CMT0_Stop(void)
+{
+    /* Disable CMI0 interrupt in ICU */
+    IEN(CMT0,CMI0) = 0U;
+
+    /* Stop CMT0 count */
+    CMT.CMSTR0.BIT.STR0 = 0U;
 }
 
 /* Start user code for adding. Do not edit comment generated here */
