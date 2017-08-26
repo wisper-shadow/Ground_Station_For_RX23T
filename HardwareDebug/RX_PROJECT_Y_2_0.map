@@ -1,10 +1,12 @@
-Renesas Optimizing Linker (W2.04.00 )             26-Aug-2017 12:22:37
+Renesas Optimizing Linker (W2.04.00 )             26-Aug-2017 13:01:11
 
 *** Options ***
 
 -subcommand=LinkerSubCommand.tmp
 -input="./src/cg_src/r_cg_cgc.obj"
 -input="./src/cg_src/r_cg_cgc_user.obj"
+-input="./src/cg_src/r_cg_cmt.obj"
+-input="./src/cg_src/r_cg_cmt_user.obj"
 -input="./src/cg_src/r_cg_dbsct.obj"
 -input="./src/cg_src/r_cg_hardware_setup.obj"
 -input="./src/cg_src/r_cg_intprg.obj"
@@ -88,7 +90,7 @@ L
 PIntPRG
                                   fffe1803  fffe1810         e   1
 P
-                                  fffe1811  fffe2325       b15   1
+                                  fffe1811  fffe23ed       bdd   1
 EXCEPTVECT
                                   ffffff80  fffffffb        7c   4
 RESETVECT
@@ -133,8 +135,8 @@ FILE=.\src\cg_src\r_cg_main.obj
                                   00000c28         1   data ,g         2
   _Coo_y
                                   00000c29         1   data ,g         2
-  _i
-                                  00000c2a         1   data ,g         0
+  _time_stamp
+                                  00000c2a         1   data ,g         1
   _i$1
                                   00000c2b         1   data ,l         1
 FILE=.\src\oled\oled.obj
@@ -253,130 +255,144 @@ FILE=.\src\cg_src\r_cg_cgc.obj
                                   fffe1811  fffe185c        4c
   _R_CGC_Create
                                   fffe1811        4c   func ,g         1
+FILE=.\src\cg_src\r_cg_cmt.obj
+                                  fffe185d  fffe18b3        57
+  _R_CMT0_Create
+                                  fffe185d        2e   func ,g         1
+  _R_CMT0_Start
+                                  fffe188b        13   func ,g         1
+  _R_CMT0_Stop
+                                  fffe189e        16   func ,g         0
+FILE=.\src\cg_src\r_cg_cmt_user.obj
+                                  fffe18b4  fffe18c1         e
+  _r_cmt_cmi0_interrupt
+                                  fffe18b4         e   func ,l         0
 FILE=.\src\cg_src\r_cg_hardware_setup.obj
-                                  fffe185d  fffe1889        2d
+                                  fffe18c2  fffe18f2        31
   _R_Systeminit
-                                  fffe185d        2b   func ,g         1
+                                  fffe18c2        2f   func ,g         1
   _HardwareSetup
-                                  fffe1888         2   func ,g         1
+                                  fffe18f1         2   func ,g         1
 FILE=.\src\cg_src\r_cg_main.obj
-                                  fffe188a  fffe1bcd       344
+                                  fffe18f3  fffe1c95       3a3
   _SCI1_TransIntHandler
-                                  fffe188a         a   func ,g         1
+                                  fffe18f3         a   func ,g         1
   _SCI1_IntHandler
-                                  fffe1894        48   func ,g         1
+                                  fffe18fd        48   func ,g         1
+  _CMT0_IntHandler
+                                  fffe1945        4d   func ,g         1
   _Data_Caculate
-                                  fffe18dc        53   func ,g         1
+                                  fffe1992        53   func ,g         1
   _main
-                                  fffe192f        19   func ,g         1
+                                  fffe19e5        13   func ,g         1
   _R_MAIN_UserInit
-                                  fffe1948        10   func ,l         1
+                                  fffe19f8        14   func ,l         1
   _KeyScan
-                                  fffe1958       170   func ,g         1
+                                  fffe1a0c       184   func ,g         1
   _OLED_Display
-                                  fffe1ac8        bd   func ,g         1
+                                  fffe1b90        bd   func ,g         1
   _Flag_Display
-                                  fffe1b85        49   func ,g         1
+                                  fffe1c4d        49   func ,g         0
 FILE=.\src\cg_src\r_cg_port.obj
-                                  fffe1bce  fffe1c15        48
+                                  fffe1c96  fffe1cdd        48
   _R_PORT_Create
-                                  fffe1bce        48   func ,g         1
+                                  fffe1c96        48   func ,g         1
 FILE=.\src\cg_src\r_cg_sbrk.obj
-                                  fffe1c16  fffe1c36        21
+                                  fffe1cde  fffe1cfe        21
   _sbrk
-                                  fffe1c16        21   func ,g         0
+                                  fffe1cde        21   func ,g         0
 FILE=.\src\cg_src\r_cg_sci.obj
-                                  fffe1c37  fffe1d26        f0
+                                  fffe1cff  fffe1dee        f0
   _R_SCI1_Create
-                                  fffe1c37        50   func ,g         1
+                                  fffe1cff        50   func ,g         1
   _R_SCI1_Start
-                                  fffe1c87        1b   func ,g         1
+                                  fffe1d4f        1b   func ,g         1
   _R_SCI1_Stop
-                                  fffe1ca2        2f   func ,g         0
+                                  fffe1d6a        2f   func ,g         0
   _R_SCI1_Serial_Receive
-                                  fffe1cd1        2c   func ,g         2
+                                  fffe1d99        2c   func ,g         2
   _R_SCI1_Serial_Send
-                                  fffe1cfd        2a   func ,g         9
+                                  fffe1dc5        2a   func ,g         9
 FILE=.\src\cg_src\r_cg_sci_user.obj
-                                  fffe1d27  fffe1de2        bc
+                                  fffe1def  fffe1eaa        bc
   _r_sci1_transmit_interrupt
-                                  fffe1d27        35   func ,l         0
+                                  fffe1def        35   func ,l         0
   _r_sci1_transmitend_interrupt
-                                  fffe1d5c        1f   func ,l         0
+                                  fffe1e24        1f   func ,l         0
   _r_sci1_receive_interrupt
-                                  fffe1d7b        42   func ,l         0
+                                  fffe1e43        42   func ,l         0
   _r_sci1_receiveerror_interrupt
-                                  fffe1dbd        1d   func ,l         0
+                                  fffe1e85        1d   func ,l         0
   _r_sci1_callback_transmitend
-                                  fffe1dda         4   func ,l         1
+                                  fffe1ea2         4   func ,l         1
   _r_sci1_callback_receiveend
-                                  fffe1dde         4   func ,l         1
+                                  fffe1ea6         4   func ,l         1
   _r_sci1_callback_receiveerror
-                                  fffe1de2         1   func ,l         1
+                                  fffe1eaa         1   func ,l         1
 FILE=.\src\delay\delay.obj
-                                  fffe1de3  fffe1e1d        3b
+                                  fffe1eab  fffe1ee5        3b
   _delay_ms
-                                  fffe1de3        25   func ,g         9
+                                  fffe1eab        25   func ,g         9
   _delay_us
-                                  fffe1e08        16   func ,g         0
+                                  fffe1ed0        16   func ,g         0
 FILE=.\src\oled\oled.obj
-                                  fffe1e1e  fffe22db       4be
+                                  fffe1ee6  fffe23a3       4be
   _IIC_Start
-                                  fffe1e1e         e   func ,g         2
+                                  fffe1ee6         e   func ,g         2
   _IIC_Stop
-                                  fffe1e2c         c   func ,g         2
+                                  fffe1ef4         c   func ,g         2
   _IIC_Wait_Ack
-                                  fffe1e38         a   func ,g         6
+                                  fffe1f00         a   func ,g         6
   _Write_IIC_Byte
-                                  fffe1e42        26   func ,g         6
+                                  fffe1f0a        26   func ,g         6
   _Write_IIC_Command
-                                  fffe1e68        24   func ,g         1
+                                  fffe1f30        24   func ,g         1
   _Write_IIC_Data
-                                  fffe1e8c        26   func ,g         1
+                                  fffe1f54        26   func ,g         1
   _OLED_WR_Byte
-                                  fffe1eb2         b   func ,g        36
+                                  fffe1f7a         b   func ,g        36
   _fill_picture
-                                  fffe1ebd        41   func ,g         0
+                                  fffe1f85        41   func ,g         0
   _Delay_50ms
-                                  fffe1efe        13   func ,g         0
+                                  fffe1fc6        13   func ,g         0
   _Delay_1ms
-                                  fffe1f11        18   func ,g         0
+                                  fffe1fd9        18   func ,g         0
   _OLED_Set_Pos
-                                  fffe1f29        26   func ,g         6
+                                  fffe1ff1        26   func ,g         6
   _OLED_Display_On
-                                  fffe1f4f        1e   func ,g         0
+                                  fffe2017        1e   func ,g         0
   _OLED_Display_Off
-                                  fffe1f6d        1e   func ,g         0
+                                  fffe2035        1e   func ,g         0
   _OLED_Clear
-                                  fffe1f8b        41   func ,g         1
+                                  fffe2053        41   func ,g         1
   _OLED_On
-                                  fffe1fcc        3f   func ,g         0
+                                  fffe2094        3f   func ,g         0
   _OLED_ShowChar
-                                  fffe200b        95   func ,g         2
+                                  fffe20d3        95   func ,g         2
   _oled_pow
-                                  fffe20a0        14   func ,g         1
+                                  fffe2168        14   func ,g         1
   _OLED_ShowNum
-                                  fffe20b4        79   func ,g         3
+                                  fffe217c        79   func ,g         3
   _OLED_ShowString
-                                  fffe212d        36   func ,g         4
+                                  fffe21f5        36   func ,g         6
   _OLED_ShowCHinese
-                                  fffe2163        55   func ,g         b
+                                  fffe222b        55   func ,g         d
   _OLED_DrawBMP
-                                  fffe21b8        49   func ,g         0
+                                  fffe2280        49   func ,g         0
   _OLED_Init
-                                  fffe2201        db   func ,g         1
+                                  fffe22c9        db   func ,g         1
 FILE=__initsct
-                                  fffe22dc  fffe2325        4a
+                                  fffe23a4  fffe23ed        4a
   __INITSCT
-                                  fffe22dc         0   none ,g         1
+                                  fffe23a4         0   none ,g         1
   loop1
-                                  fffe22ee         0   none ,l         1
+                                  fffe23b6         0   none ,l         1
   next_loop1
-                                  fffe22fc         0   none ,l         2
+                                  fffe23c4         0   none ,l         2
   loop3
-                                  fffe230e         0   none ,l         1
+                                  fffe23d6         0   none ,l         1
   next_loop3
-                                  fffe231f         0   none ,l         2
+                                  fffe23e7         0   none ,l         2
 
 SECTION=EXCEPTVECT
 FILE=.\src\cg_src\r_cg_vecttbl.obj

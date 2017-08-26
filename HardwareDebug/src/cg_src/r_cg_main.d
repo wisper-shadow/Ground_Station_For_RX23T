@@ -7,6 +7,8 @@ src/cg_src/r_cg_main.obj src/cg_src/r_cg_main.d: ../src/cg_src/r_cg_cgc.h
 ../src/cg_src/r_cg_cgc.h:
 src/cg_src/r_cg_main.obj src/cg_src/r_cg_main.d: ../src/cg_src/r_cg_port.h
 ../src/cg_src/r_cg_port.h:
+src/cg_src/r_cg_main.obj src/cg_src/r_cg_main.d: ../src/cg_src/r_cg_cmt.h
+../src/cg_src/r_cg_cmt.h:
 src/cg_src/r_cg_main.obj src/cg_src/r_cg_main.d: ../src/cg_src/r_cg_sci.h
 ../src/cg_src/r_cg_sci.h:
 src/cg_src/r_cg_main.obj src/cg_src/r_cg_main.d: D:\Documents\Texas Instruments\workspace_v7\RX_PROJECT_Y_2_0\src\../src/oled/oled.h

@@ -1,5 +1,7 @@
 -input="./src/cg_src/r_cg_cgc.obj"
 -input="./src/cg_src/r_cg_cgc_user.obj"
+-input="./src/cg_src/r_cg_cmt.obj"
+-input="./src/cg_src/r_cg_cmt_user.obj"
 -input="./src/cg_src/r_cg_dbsct.obj"
 -input="./src/cg_src/r_cg_hardware_setup.obj"
 -input="./src/cg_src/r_cg_intprg.obj"

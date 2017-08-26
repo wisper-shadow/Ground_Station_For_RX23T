@@ -7,6 +7,8 @@ src/cg_src/r_cg_hardware_setup.obj src/cg_src/r_cg_hardware_setup.d: ../src/cg_s
 ../src/cg_src/r_cg_cgc.h:
 src/cg_src/r_cg_hardware_setup.obj src/cg_src/r_cg_hardware_setup.d: ../src/cg_src/r_cg_port.h
 ../src/cg_src/r_cg_port.h:
+src/cg_src/r_cg_hardware_setup.obj src/cg_src/r_cg_hardware_setup.d: ../src/cg_src/r_cg_cmt.h
+../src/cg_src/r_cg_cmt.h:
 src/cg_src/r_cg_hardware_setup.obj src/cg_src/r_cg_hardware_setup.d: ../src/cg_src/r_cg_sci.h
 ../src/cg_src/r_cg_sci.h:
 src/cg_src/r_cg_hardware_setup.obj src/cg_src/r_cg_hardware_setup.d: ../src/cg_src/r_cg_userdefine.h

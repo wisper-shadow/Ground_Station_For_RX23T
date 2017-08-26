@@ -45,6 +45,7 @@ Includes
 Global variables and functions
 ***********************************************************************************************************************/
 /* Start user code for global. Do not edit comment generated here */
+extern void CMT0_IntHandler(void);
 /* End user code. Do not edit comment generated here */
 
 /***********************************************************************************************************************
@@ -61,6 +62,7 @@ Global variables and functions
 static void r_cmt_cmi0_interrupt(void)
 {
     /* Start user code. Do not edit comment generated here */
+    CMT0_IntHandler();
     /* End user code. Do not edit comment generated here */
 }
 

@@ -62,7 +62,7 @@ uint8_t buff[12]= {0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x10,0xac,0xad};
 uint8_t Distance = 0;
 uint8_t Coo_x = 0,Coo_y = 0;
 int flag_display = 0;
-uint8_t i = 0;
+uint8_t time_stamp = 0;
 
 bool sci1_trans = false;
 bool start_receive = false;
@@ -90,6 +90,20 @@ void SCI1_IntHandler(void)
     if(SCI1_get_char == Data_STX)
         start_receive = true;
     R_SCI1_Serial_Receive(&SCI1_get_char,1);
+}
+
+void CMT0_IntHandler(void)
+{
+    setpsw_i();
+    if(time_stamp == 25)
+        OLED_ShowString(108,0,"sw",16);
+    if(time_stamp == 50)
+    {
+        time_stamp = 0;
+        OLED_ShowString(108,0,"  ",16);
+    }
+    OLED_Display();
+    time_stamp++;
 }
 
 void Data_Caculate(void)
@@ -120,8 +134,6 @@ void main(void)
     {
     	KeyScan();
     	Data_Caculate();
-    	OLED_Display();
-    	Flag_Display();
     }
     /* End user code. Do not edit comment generated here */
 }
@@ -135,6 +147,7 @@ void R_MAIN_UserInit(void)
 {
     /* Start user code. Do not edit comment generated here */
 	R_SCI1_Start();
+	R_CMT0_Start();
 	R_SCI1_Serial_Receive(&SCI1_get_char,1);
 	/* End user code. Do not edit comment generated here */
 }
@@ -151,6 +164,7 @@ void KeyScan(void)
 	            while(DROP==0);
 	            LED2 = 0;
 				R_SCI1_Serial_Send(&buff[11],1);
+				OLED_ShowCHinese(110,3,7);
 			}
 		}
 	if(EMERGENCY == 0)
@@ -162,6 +176,7 @@ void KeyScan(void)
             while(EMERGENCY==0);
             LED2 = 0;
 			R_SCI1_Serial_Send(&buff[10],1);
+			OLED_ShowCHinese(110,3,10);
 		}
 	}
 	if(KEY_GO == 0)
@@ -222,7 +237,7 @@ void KeyScan(void)
             while(KEY_STOP == 0);
             LED2 = 0;
 			R_SCI1_Serial_Send(&buff[4],1);
-			OLED_ShowCHinese(110,3,11);
+			OLED_ShowCHinese(110,6,10);
 		}
 	}
 	if(KEY_LEFT_90 == 0)

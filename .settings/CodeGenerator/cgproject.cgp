@@ -69105,11 +69105,11 @@
           </DataElement>
         </SerializableData>
         <SerializableData name="CMTn_CLOCK_SELECT_PCLK32">
-          <DataElement key="Checked" value="False">
+          <DataElement key="Checked" value="True">
           </DataElement>
         </SerializableData>
         <SerializableData name="CMTn_CLOCK_SELECT_PCLK128">
-          <DataElement key="Checked" value="True">
+          <DataElement key="Checked" value="False">
           </DataElement>
         </SerializableData>
         <SerializableData name="CMTn_CLOCK_SELECT_PCLK512">
@@ -69117,7 +69117,7 @@
           </DataElement>
         </SerializableData>
         <SerializableData name="CMTn_INTERVAL_VALUE">
-          <DataElement key="Text" value="100">
+          <DataElement key="Text" value="20">
           </DataElement>
         </SerializableData>
         <SerializableData name="CMTn_INTERVAL_UNIT">

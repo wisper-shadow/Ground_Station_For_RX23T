@@ -6,6 +6,8 @@
 C_SRCS += \
 ..\src/cg_src/r_cg_cgc.c \
 ..\src/cg_src/r_cg_cgc_user.c \
+..\src/cg_src/r_cg_cmt.c \
+..\src/cg_src/r_cg_cmt_user.c \
 ..\src/cg_src/r_cg_dbsct.c \
 ..\src/cg_src/r_cg_hardware_setup.c \
 ..\src/cg_src/r_cg_intprg.c \
@@ -21,6 +23,8 @@ C_SRCS += \
 C_DEPS += \
 ./src/cg_src/r_cg_cgc.d \
 ./src/cg_src/r_cg_cgc_user.d \
+./src/cg_src/r_cg_cmt.d \
+./src/cg_src/r_cg_cmt_user.d \
 ./src/cg_src/r_cg_dbsct.d \
 ./src/cg_src/r_cg_hardware_setup.d \
 ./src/cg_src/r_cg_intprg.d \
@@ -36,6 +40,8 @@ C_DEPS += \
 OBJS += \
 ./src/cg_src/r_cg_cgc.obj \
 ./src/cg_src/r_cg_cgc_user.obj \
+./src/cg_src/r_cg_cmt.obj \
+./src/cg_src/r_cg_cmt_user.obj \
 ./src/cg_src/r_cg_dbsct.obj \
 ./src/cg_src/r_cg_hardware_setup.obj \
 ./src/cg_src/r_cg_intprg.obj \
