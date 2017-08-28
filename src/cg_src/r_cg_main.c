@@ -67,6 +67,13 @@ uint8_t time_stamp = 0;
 bool sci1_trans = false;
 bool start_receive = false;
 
+void Data_Caculate(void)
+{
+    Coo_x = (SCI1_Receive_Data[0] - 48) * 100 + (SCI1_Receive_Data[1] - 48) * 10 + (SCI1_Receive_Data[2] - 48);
+    Coo_y = (SCI1_Receive_Data[4] - 48) * 100 + (SCI1_Receive_Data[5] - 48) * 10 + (SCI1_Receive_Data[6] - 48);
+    Distance = (SCI1_Receive_Data[8] - 48) * 100 + (SCI1_Receive_Data[9] - 48) * 10 + (SCI1_Receive_Data[10] - 48);
+}
+
 void SCI1_TransIntHandler(void)
 {
     sci1_trans = true;
@@ -81,10 +88,13 @@ void SCI1_IntHandler(void)
         if(SCI1_get_char == '\t')
             SCI1_Receive_Data[i] = ' ';
         i++;
+        if(SCI1_get_char == 0xe0)
+            i=0;
         if(i == 11)
         {
             i = 0;
             start_receive = false;
+            Data_Caculate();
         }
     }
     if(SCI1_get_char == Data_STX)
@@ -110,13 +120,6 @@ void CMT0_IntHandler(void)
     time_stamp++;
 }
 
-void Data_Caculate(void)
-{
-    Coo_x = (SCI1_Receive_Data[0] - 48) * 100 + (SCI1_Receive_Data[1] - 48) * 10 + (SCI1_Receive_Data[2] - 48);
-    Coo_y = (SCI1_Receive_Data[4] - 48) * 100 + (SCI1_Receive_Data[5] - 48) * 10 + (SCI1_Receive_Data[6] - 48);
-    Distance = (SCI1_Receive_Data[8] - 48) * 100 + (SCI1_Receive_Data[9] - 48) * 10 + (SCI1_Receive_Data[10] - 48);
-}
-
 /* End user code. Do not edit comment generated here */
 
 
@@ -137,7 +140,6 @@ void main(void)
     while (1U)
     {
     	KeyScan();
-    	Data_Caculate();
     }
     /* End user code. Do not edit comment generated here */
 }
@@ -161,7 +163,7 @@ void KeyScan(void)
 {
 	if(DROP == 0)
 		{
-			delay_ms(5);
+			delay_ms(20);
 			if(DROP == 0)
 			{
 	            LED2 = 1;
@@ -173,7 +175,7 @@ void KeyScan(void)
 		}
 	if(EMERGENCY == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(EMERGENCY == 0)
 		{
             LED2 = 1;
@@ -185,7 +187,7 @@ void KeyScan(void)
 	}
 	if(KEY_GO == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_GO == 0)
 		{
             LED2 = 1;
@@ -197,7 +199,7 @@ void KeyScan(void)
 	}
 	if(KEY_BACK == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_BACK == 0)
 		{
             LED2 = 1;
@@ -210,7 +212,7 @@ void KeyScan(void)
 	}
 	if(KEY_LEFT == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_LEFT == 0)
 		{
             LED2 = 1;
@@ -222,7 +224,7 @@ void KeyScan(void)
 	}
 	if(KEY_RIGHT == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_RIGHT == 0)
 		{
             LED2 = 1;
@@ -234,7 +236,7 @@ void KeyScan(void)
 	}
 	if(KEY_STOP == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_STOP == 0)
 		{
             LED2 = 1;
@@ -246,7 +248,7 @@ void KeyScan(void)
 	}
 	if(KEY_LEFT_90 == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_LEFT_90 == 0)
 		{
             LED2 = 1;
@@ -257,7 +259,7 @@ void KeyScan(void)
 	}
 	if(KEY_RIGHT_90 == 0)
 	{
-		delay_ms(5);
+		delay_ms(20);
 		if(KEY_RIGHT_90 == 0)
 		{
             LED2 = 1;
