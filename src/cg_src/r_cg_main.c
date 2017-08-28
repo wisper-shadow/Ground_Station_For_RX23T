@@ -85,11 +85,16 @@ void SCI1_IntHandler(void)
     if(start_receive)
     {
         SCI1_Receive_Data[i] = SCI1_get_char;
+        if(i == 3 && SCI1_get_char >= '0' && SCI1_get_char <= '9')
+        {
+            SCI1_Receive_Data[0] = SCI1_Receive_Data[1];
+            SCI1_Receive_Data[1] = SCI1_Receive_Data[2];
+            SCI1_Receive_Data[2] = SCI1_Receive_Data[3];
+            i--;
+        }
         if(SCI1_get_char == '\t')
             SCI1_Receive_Data[i] = ' ';
         i++;
-        if(SCI1_get_char == 0xe0)
-            i=0;
         if(i == 11)
         {
             i = 0;
